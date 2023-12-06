@@ -17,8 +17,9 @@ const Login = () => {
       }).then((res) => {
         console.log(res);
         if (res.status === 200) {
-          localStorage.setItem("token", res.data.token);
-          localStorage.setItem("user", JSON.stringify(res.data.user));
+          console.log(res.data);
+          sessionStorage.setItem("token", res.data.token);
+          sessionStorage.setItem("user", JSON.stringify(res.data.user));
           navigate("/home");
         }
       }).catch((err) => {

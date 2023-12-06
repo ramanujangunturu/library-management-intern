@@ -92,18 +92,42 @@ exports.signUp = async (req, res) => {
     }
 };
 
+exports.details= async (req,res)=>{
+    try{
+        const user = await User.findById(req.user.id)
+        if(!user){
+            return res.status(404).json({
+                success: false,
+                message: "User not found"
+            })
+        }
+        res.status(200).json({
+            success: true,
+            user
+        })
+    }catch(error){
+        console.error("Error in details:", error);
+        return res.status(500).json({
+            success: false,
+            message: "User Cannot be Registered. Please Try Again.",
+            error: error.message,
+        });
+    }
+}   
+
 
 exports.login = async (req, res) => {
     try {
         const { email, password } = req.body;
 
+        //returning error if email or password is missing
         if (!email || !password) {
             return res.status(400).json({
                 success: false,
                 message: "Please Provide Both Email and Password to Login.",
             });
         }
-
+        //returning error if email is not in proper format
         const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (!emailPattern.test(email)) {
             return res.status(400).json({
@@ -111,7 +135,7 @@ exports.login = async (req, res) => {
                 message: "Invalid Email Format. Please Provide a valid Email Address.",
             });
         }
-
+        //finding user with the provided email
         const user = await User.findOne({ email })
             .populate("reservedBooks")
             .exec();
@@ -122,7 +146,7 @@ exports.login = async (req, res) => {
                 message: "Invalid Credentials. User is not Registered. Please Sign up.",
             });
         }
-
+        //checking if user is already logged in
         if (user.token) {
             return res.status(401).json({
                 success: false,
