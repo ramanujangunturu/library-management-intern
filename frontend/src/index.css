@@ -41,3 +41,11 @@
 .active-link {
     color: #4CAF50;
 }
+
+.toast-message {
+    color: black;
+    font-size: 15px;
+    padding: 10px 12px;
+    position: relative;
+    background: #f3f3f3;
+}

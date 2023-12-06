@@ -25,6 +25,7 @@ const Book = () => {
     };
     const books = [
         {
+            "_id": 1,
             "bookPhoto": "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcS8t902mozZtNMVvdk7a3yyhtE1ToWBBpWoa4-w_9oYPu7ebi1k",
             "bookName": "think and grow rich",
             "publicationYear": "2023",
@@ -35,6 +36,7 @@ const Book = () => {
             "availableCopies": 10
         },
         {
+            "_id": 2,
             "bookPhoto": "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcQGHu0unjWbibmvUEPjiCCIGoUdFFsD6kR97xPZOtk-MzijSoA4",
             "bookName": "think and grow rich",
             "publicationYear": "2023",
@@ -44,6 +46,7 @@ const Book = () => {
             "category": "category 1",
             "availableCopies": 10
         }, {
+            "_id": 3,
             "bookPhoto": "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcQziX6iHIe31XJJ_dljYtvd9ixYpmpgI8Kl77AmUuTMSVNHN0ht",
             "bookName": "think and grow rich",
             "publicationYear": "2023",
@@ -53,6 +56,7 @@ const Book = () => {
             "category": "category 1",
             "availableCopies": 10
         }, {
+            "_id": 4,
             "bookPhoto": "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcQGHu0unjWbibmvUEPjiCCIGoUdFFsD6kR97xPZOtk-MzijSoA4",
             "bookName": "think and grow rich",
             "publicationYear": "2023",
@@ -62,6 +66,7 @@ const Book = () => {
             "category": "category 1",
             "availableCopies": 10
         }, {
+            "_id": 5,
             "bookPhoto": "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcQziX6iHIe31XJJ_dljYtvd9ixYpmpgI8Kl77AmUuTMSVNHN0ht",
             "bookName": "think and grow rich",
             "publicationYear": "2023",
@@ -71,6 +76,7 @@ const Book = () => {
             "category": "category 1",
             "availableCopies": 10
         }, {
+            "_id": 6,
             "bookPhoto": "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcS8t902mozZtNMVvdk7a3yyhtE1ToWBBpWoa4-w_9oYPu7ebi1k",
             "bookName": "think and grow rich",
             "publicationYear": "2023",
@@ -80,6 +86,7 @@ const Book = () => {
             "category": "category 1",
             "availableCopies": 10
         }, {
+            "_id": 7,
             "bookPhoto": "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcS8t902mozZtNMVvdk7a3yyhtE1ToWBBpWoa4-w_9oYPu7ebi1k",
             "bookName": "think and grow rich",
             "publicationYear": "2023",
@@ -89,6 +96,7 @@ const Book = () => {
             "category": "category 1",
             "availableCopies": 10
         }, {
+            "_id": 8,
             "bookPhoto": "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcS8t902mozZtNMVvdk7a3yyhtE1ToWBBpWoa4-w_9oYPu7ebi1k",
             "bookName": "think and grow rich",
             "publicationYear": "2023",
@@ -99,6 +107,7 @@ const Book = () => {
             "availableCopies": 10
         },
         {
+            "_id": 9,
             "bookPhoto": "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcS8t902mozZtNMVvdk7a3yyhtE1ToWBBpWoa4-w_9oYPu7ebi1k",
             "bookName": "think and grow rich",
             "publicationYear": "2023",

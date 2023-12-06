@@ -6,11 +6,14 @@ import Home from "./components/Home.jsx";
 import AdminLogin from "./components/AdminLogin.jsx";
 import BookPage from "./components/BookPage.jsx";
 import AddBook from "./components/AddBook.jsx";
+import { ToastContainer } from "react-toastify";
+
 
 
 function App() {
   return (
     <>
+      <ToastContainer />
       <Routes>
         <Route path="/home" Component={Home}></Route>
         <Route path="/" Component={Login} ></Route>

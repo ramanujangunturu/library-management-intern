@@ -31,11 +31,11 @@ const Navbar = () => {
                             <NavLink to="/home" className="block py-2 px-3  rounded md:bg-transparent md:text-gray-700 md:p-0 uppercase tracking-wide text-sm font-bold text-gray-700 hover:text-[#4CAF50] aria-[current=page]:text-red-600" aria-current="page">Home</NavLink>
                         </li>
                         <li>
-                            <NavLink to="/add-book" activeClassName="active-link" className="block py-2 px-3 rounded  md:hover:bg-transparent md:hover:text-[#4CAF50] md:p-0 md:dark:hover:text-[#4CAF50] uppercase tracking-wide text-sm font-bold text-gray-700">Add a Book</NavLink>
+                            <NavLink to="/add-book"  className="block py-2 px-3 rounded  md:hover:bg-transparent md:hover:text-[#4CAF50] md:p-0 md:dark:hover:text-[#4CAF50] uppercase tracking-wide text-sm font-bold text-gray-700">Add a Book</NavLink>
                         </li>
                         <li>
                             <NavLink to="/profile"
-                                activeClassName='active-link'
+                                
                                 className="block py-2 px-3  rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-[#4CAF50] md:p-0 uppercase tracking-wide text-sm font-bold text-gray-700 "
                             >
                                 Login
