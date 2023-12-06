@@ -3,7 +3,7 @@ const Navbar = () => {
     return (
         <nav className="bg-[#e0f7ed] border-gray-200">
             <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-                <NavLink to="/home" className="flex items-center space-x-3 rtl:space-x-reverse">
+                <NavLink to="/home" className="flex items-center space-x-3 rtl:space-x-reverse aria-[current=page]:text-red-600">
                     <span className="self-center  whitespace-nowrap  uppercase tracking-wide text-xl font-bold text-gray-700 ">Library Management System</span>
                 </NavLink>
                 <div className="flex md:order-2">
@@ -28,13 +28,18 @@ const Navbar = () => {
                     </div>
                     <ul className="flex flex-col p-4 md:p-0 mt-4 font-medium border  rounded-lg  md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 ">
                         <li>
-                            <NavLink to="#" className="block py-2 px-3 bg-[#4CAF50] rounded md:bg-transparent md:text-[#4CAF50] md:p-0 uppercase tracking-wide text-sm font-bold text-gray-700 " aria-current="page">Home</NavLink>
+                            <NavLink to="/home" className="block py-2 px-3  rounded md:bg-transparent md:text-gray-700 md:p-0 uppercase tracking-wide text-sm font-bold text-gray-700 hover:text-[#4CAF50] aria-[current=page]:text-red-600" aria-current="page">Home</NavLink>
                         </li>
                         <li>
-                            <NavLink to="#" className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-[#4CAF50] md:p-0 md:dark:hover:text-[#4CAF50] uppercase tracking-wide text-sm font-bold text-gray-700 ">Add a Book</NavLink>
+                            <NavLink to="/add-book" activeClassName="active-link" className="block py-2 px-3 rounded  md:hover:bg-transparent md:hover:text-[#4CAF50] md:p-0 md:dark:hover:text-[#4CAF50] uppercase tracking-wide text-sm font-bold text-gray-700">Add a Book</NavLink>
                         </li>
                         <li>
-                            <NavLink to="#" className="block py-2 px-3  rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-[#4CAF50] md:p-0 uppercase tracking-wide text-sm font-bold text-gray-700 ">Login</NavLink>
+                            <NavLink to="/profile"
+                                activeClassName='active-link'
+                                className="block py-2 px-3  rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-[#4CAF50] md:p-0 uppercase tracking-wide text-sm font-bold text-gray-700 "
+                            >
+                                Login
+                            </NavLink>
                         </li>
                     </ul>
                 </div>
