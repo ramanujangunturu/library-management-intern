@@ -25,10 +25,6 @@ const AdminLogin = () => {
             setLoginMessage("Invalid Credentials");
         });
     };
-    const handleAdminClick = (e) => {
-        e.preventDefault();
-        navigate("/admin");
-    }
     const handleNewUserClick = (e) => {
         e.preventDefault();
         navigate("/signup");
