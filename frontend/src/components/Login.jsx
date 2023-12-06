@@ -3,15 +3,38 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 const Login = () => {
-  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loginMessage, setLoginMessage] = useState("");
 
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
-    axios.post
+    e.preventDefault();
+    axios.post("http://localhost:5000/api/v1/auth/signin", {
+      email: email,
+      password: password,
+    }).then((res) => {
+      console.log(res);
+      if (res.status === 200) {
+        localStorage.setItem("token", res.data.token);
+        localStorage.setItem("user", JSON.stringify(res.data.user));
+        navigate("/home");
+      }
+    }).catch((err) => {
+      console.log(err);
+      setLoginMessage("Invalid Credentials");
+    });
   };
+  const handleAdminClick = (e) => {
+    e.preventDefault();
+    navigate("/admin");
+  }
+  const handleNewUserClick = (e) => {
+    e.preventDefault();
+    navigate("/signup");
+  }
+
 
   return (
     <>
@@ -54,7 +77,7 @@ const Login = () => {
               border: "1px solid #ccc",
             }}
             onChange={(e) => {
-              setUsername(e.target.value);
+              setEmail(e.target.value);
             }}
           />
           <label
@@ -90,11 +113,14 @@ const Login = () => {
               borderRadius: "4px",
               cursor: "pointer",
               border: "none",
+              margin: "10px 0",
               boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)",
             }}
           >
             Log in
-          </button>
+          </button><br />
+          <a style={{color: "blue",marginRight:"15px",cursor:"pointer"}} onClick={handleAdminClick}>Are you an admin?</a>
+          <a style={{color: "blue",cursor:"pointer"}} onClick={handleNewUserClick}>New User? Signup.</a>
         </form>
       </div>
     </>
