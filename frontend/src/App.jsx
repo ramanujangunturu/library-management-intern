@@ -7,7 +7,7 @@ import AdminLogin from "./components/AdminLogin.jsx";
 import BookPage from "./components/BookPage.jsx";
 import AddBook from "./components/AddBook.jsx";
 import { ToastContainer } from "react-toastify";
-
+import Profile from "./components/Profile.jsx";
 
 
 function App() {
@@ -21,6 +21,7 @@ function App() {
         <Route path="/admin" Component={AdminLogin}></Route>
         <Route path="/book/:id" Component={BookPage}></Route>
         <Route path="/add-book" Component={AddBook}></Route>
+        <Route path="/profile" Component={Profile}></Route>
       </Routes>
     </>
   );
