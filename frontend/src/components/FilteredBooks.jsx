@@ -1,39 +1,27 @@
 import React from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
-import axios from 'axios';
 
-const Book = () => {
-    const [books, setBooks] = React.useState([]);
-    const [dataFetched, setDataFetched] = React.useState(false);
-    React.useEffect(() => {
-        if (!dataFetched) {
-            fetchBooks();
-
-        }
-    }, [dataFetched]);
-
-    const fetchBooks = async () => {
-        try {
-            const response = await axios.get('http://localhost:5000/api/v1/book/getAllBooks');
-            console.log(response.data.books)
-            setBooks(response.data.books)
-        } catch (error) {
-            console.error('Error fetching books:', error);
-        }
-    };
+const FilteredBooks = ({ filteredBooks }) => {
     const navigate = useNavigate()
     const [expandedDescriptionIndex, setExpandedDescriptionIndex] = React.useState(null);
+    const [currentPage, setCurrentPage] = React.useState(1)
+    const booksPerPage = 12;
+
+    const indexOfLastBook = currentPage * booksPerPage;
+    const indexOfFirstBook = indexOfLastBook - booksPerPage;
+    const currentBooks = filteredBooks.slice(indexOfFirstBook, indexOfLastBook);
     const handleReadMoreClick = (index) => {
         navigate(`/book/${index}`)
     };
+    console.log("This is the filteredbooks", filteredBooks.length)
     return (
         <React.Fragment>
-            <div className="max-w-6xl mx-auto grid gap-8 sm:grid-cols-1 md:grid-cols-3">
-                {books?.length === 0 ? (
+            <div className='grid gap-8 md:grid-cols-3'>
+                {filteredBooks?.length === 0 ? (
                     <p>No books available</p>
                 ) : (
-                    books?.map((book) => (
-                        <div className="max-w-6xl mx-auto h-screen" key={book._id}>
+                    filteredBooks?.map((book) => (
+                        <div className="max-w-6xl grid mx-auto h-screen" key={book._id}>
                             <div className="flex items-center justify-center min-h-screen">
                                 <div className="max-w-sm w-full py-6 px-3">
                                     <img src={book.bookPhoto} width={200} alt={book.bookName} className='m-4'/>
@@ -124,4 +112,4 @@ const Book = () => {
     );
 };
 
-export default Book;
+export default FilteredBooks;

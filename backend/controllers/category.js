@@ -32,22 +32,19 @@ exports.createCategory = async (req, res) => {
 exports.getCategory = async (req, res) => {
     try {
         const { id } = req.params;
-        console.log("This is the id", id)
         // if (!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send(`No post with id: ${id}`);
 
         const categoryDetails = await Category.findById(id);
-        console.log("This the categoryDetails",categoryDetails)
         if (!categoryDetails) {
             return res.status(404).json({
                 success: false,
                 message: "No Category Found"
             });
         }
-
         return res.status(200).json({
             success: true,
             message: "Category details fetched successfully",
-            categoryDetails,
+            Books,
         });
 
     } catch (error) {

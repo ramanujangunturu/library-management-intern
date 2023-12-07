@@ -23,6 +23,10 @@ const Edit = ({details}) => {
       },
     })
       .then((res) => {
+<<<<<<< HEAD
+=======
+        console.log(res.data);
+>>>>>>> cdc6e25935c6926b927d710f537e4c549b2d3623
         navigate("/home");
         toast.success("Book Updated Successfully", {
           autoClose: 3000,
@@ -162,4 +166,8 @@ const Edit = ({details}) => {
   );
 };
 
+<<<<<<< HEAD
 export default Edit;
+=======
+export default Edit;
+>>>>>>> cdc6e25935c6926b927d710f537e4c549b2d3623
