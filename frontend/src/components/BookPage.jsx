@@ -6,6 +6,8 @@ import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import { toast } from "react-toastify";
 import Edit from './EditPage';
+import { NavLink } from 'react-router-dom';
+
 import "react-toastify/dist/ReactToastify.css";
 import "../index.css";
 const BookPage = () => {
