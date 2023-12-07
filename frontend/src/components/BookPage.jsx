@@ -50,11 +50,21 @@ const BookPage = () => {
         }
     };
 
+    const fetchSimilarBooks = async () => {
+        try {
+            console.log("This is the Id", id)
+            const response = await axios.get(`http://localhost:5000/api/v1/category/getCategory/${id}/`)
+            console.log("similar Books", response.data)
+        } catch (error) {
+            console.log("Error while fetching the same books", error.message);
+        }
+    }
 
     React.useEffect(() => {
         if (!dataFetched) {
             fetchCardData();
         }
+        fetchSimilarBooks()
     }, [dataFetched, id]);
 
     // const book = {
@@ -139,7 +149,9 @@ const BookPage = () => {
                         {
                             book.availability === true && (
                                 <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                                    Reserve Book
+                                    <NavLink to={`/book/${id}`}>
+                                        Reserve Book
+                                    </NavLink>
                                 </button>
                             )
                         }
