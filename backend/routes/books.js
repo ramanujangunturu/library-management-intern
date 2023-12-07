@@ -8,8 +8,8 @@ router.get('/getBook/:id',auth,getBook)
 router.get('/getAllBooks',showAllBooks)
 
 //Admin routes
-router.post('/createBook',auth,isAdmin,createBook)
+router.post('/createBook',createBook)
 router.put('/editBook/:id',auth,isAdmin,editBookDetails)
-router.delete('/deleteBook/:id',auth,isAdmin,deleteBook)
+router.delete('/deleteBook/:id',deleteBook)
 
 module.exports = router

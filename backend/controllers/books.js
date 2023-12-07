@@ -168,24 +168,14 @@ exports.editBookDetails = async (req, res) => {
 exports.deleteBook = async (req, res) => {
     try {
         const { id } = req.params;
-        if (!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send(`No post with id: ${id}`);
+        if (!mongoose.isValidObjectId(id)) return res.status(404).send(`No post with id: ${id}`);
 
-        const bookDetails = Book.findById(id);
+        const bookDetails = await Book.findById(id);
+        console.log(bookDetails,"these are the book details")
         if (!bookDetails) {
             return res.status(404).json({
                 message: "No book details found by given id",
                 success: false,
-            })
-        }
-
-        const updateCategory = await Category.findByIdAndUpdate({ _id: bookDetails.category }, {
-            $pull: { books: mongoose.Types.ObjectId(id) }
-        },)
-
-        if (!updateCategory) {
-            return res.status(403).json({
-                message: 'Couldn\'t update the category',
-                success: false
             })
         }
 
