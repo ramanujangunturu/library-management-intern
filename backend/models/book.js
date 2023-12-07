@@ -24,9 +24,9 @@ const BookSchema = new mongoose.Schema({
         type: Boolean,
         required: true,
     },
-    category:{
-        type: mongoose.Types.ObjectId,
-        ref: 'Category'
+    category: {
+        type: String,
+        required: true,
     },
     availableCopies: {
         type: Number,

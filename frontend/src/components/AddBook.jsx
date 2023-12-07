@@ -35,33 +35,13 @@ const AddBook = () => {
         setFormData({ ...formData, availability: checked });
         console.log(checked)
     }
-
-
     const handleInputChange = (e) => {
         const { name, value } = e.target;
-        if (name === 'categoryId') {
-            console.log("this is inside the cate")
-            const categoryId = e.target.value;
-            const selectedCategory = allCategories.find(
-                (category) => category.name === categoryId
-            );
-
-            if (selectedCategory) {
-                setFormData((prevState) => ({
-                    ...prevState,
-                    categoryId: selectedCategory._id,
-                }));
-            }
-            console.log("formdata", formData)
-            console.log("This is selectedCate", selectedCategory)
-        } else {
-            setFormData((prevState) => ({
-                ...prevState,
-                [name]: value,
-            }));
-        }
+        setFormData((prevState) => ({
+            ...prevState,
+            [name]: value,
+        }));
     };
-
     const handleCategoryChange = (e) => {
         const { name, value } = e.target
         setCategoryData((prevState) => ({
@@ -76,6 +56,20 @@ const AddBook = () => {
         try {
             const response = await axios.post('http://localhost:5000/api/v1/book/createBook', formData)
             console.log("New Book added", response)
+            console.log("THis is the book", formData)
+            toast.success(`Book "${formData.bookName}" added`, {
+                autoClose: 3000,
+                hideProgressBar: true
+            });
+            setFormData({
+                bookName: "",
+                bookPhoto: "",
+                bookDescription: "",
+                availableCopies: "",
+                publicationYear: "",
+                author: "",
+                categoryId: ""
+            })
         } catch (error) {
             console.log("Error while adding an book", error.message)
             toast.error("Error while adding an Book")
@@ -319,11 +313,12 @@ const AddBook = () => {
                                                     value={formData.categoryId}
                                                     onChange={handleInputChange}
                                                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 dark:bg-white dark:border-gray-600 dark:placeholder-gray-900 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                                    size="1"
                                                     required
                                                 >
-                                                    <option value="">Select a category</option>
+                                                    <option className="capitalize tracking-wide text-sm font-semibold" value="">Select a category</option>
                                                     {allCategories.map((category) => (
-                                                        <option key={category._id} value={category.name}>
+                                                        <option className="capitalize tracking-wide text-sm font-semibold font" key={category._id} value={category.name}>
                                                             {category.name}
                                                         </option>
                                                     ))}
@@ -332,7 +327,7 @@ const AddBook = () => {
                                                 <input
                                                     name="category"
                                                     id="category"
-                                                    value={formData.category}
+                                                    value={formData.categoryId}
                                                     onChange={handleInputChange}
                                                     placeholder="No categories available. Add an category"
                                                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 dark:bg-white dark:border-gray-600 dark:placeholder-gray-900 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500"

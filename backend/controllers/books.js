@@ -6,16 +6,13 @@ const Category = require('../models/category.js')
 
 exports.getBook = async (req, res) => {
     try {
-
         const { id } = req.params;
-
         if (!id) {
             return res.status(400).json({
                 message: "Please provide id",
                 success: false
             })
         }
-
         if (!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send(`No post with id: ${id}`);
 
         const book = await Book.findById(id);
@@ -29,7 +26,8 @@ exports.getBook = async (req, res) => {
 
         return res.status(200).json({
             message: "Book fetched Successfully",
-            success: true
+            success: true,
+            book
         })
 
     } catch (error) {
@@ -43,15 +41,16 @@ exports.getBook = async (req, res) => {
 
 exports.showAllBooks = async (req, res) => {
     try {
-        const books = Book.find({}, {
+        const books = await Book.find({}, {
+            bookPhoto: true,
             bookName: true,
             bookDescription: true,
             publicationYear: true,
             author: true,
             availability: true,
             availableCopies: true,
-
-        }).populate('category').exec();
+            category: true
+        }).sort({ publicationYear: -1 });
 
         if (!books) {
             return res.status(400).json({
@@ -78,7 +77,7 @@ exports.showAllBooks = async (req, res) => {
 
 exports.createBook = async (req, res) => {
     try {
-        const { bookName, bookDescription, publicationYear, author, availability, availableCopies, categoryId } = req.body;
+        const { bookPhoto, bookName, bookDescription, publicationYear, author, availability, availableCopies, categoryId } = req.body;
 
         if (!bookName || !bookDescription || !publicationYear || !author || !availability || !availableCopies || !categoryId) {
             return res.status(400).json({
@@ -87,7 +86,7 @@ exports.createBook = async (req, res) => {
             })
         }
 
-        const category = await Category.findById(categoryId);
+        const category = await Category.find({ name: categoryId });
 
         if (!category) {
             return res.status(403).json({
@@ -97,17 +96,16 @@ exports.createBook = async (req, res) => {
         }
 
         const bookDetails = await Book.create({
-            bookName, bookDescription, publicationYear, author, availability, availableCopies, categoryId
+            bookPhoto, bookName, bookDescription, publicationYear, author, availability, availableCopies, category: categoryId
         })
 
-        await Category.findByIdAndUpdate({ _id: categoryId }, {
+        await Category.findOneAndUpdate({ name: categoryId }, {
             $push: {
                 books: bookDetails._id
             }
         }, {
             new: true,
         })
-
         return res.status(201).json({
             success: true,
             message: "Book created Successfully",
