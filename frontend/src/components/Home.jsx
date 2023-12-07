@@ -2,12 +2,14 @@ import React from 'react';
 import Navbar from './Navbar';
 import Book from './Book';
 import { NavLink } from 'react-router-dom';
+import FilteredBooks from './FilteredBooks';
 const Home = () => {
+    const [filteredBooks, setFilteredBooks] = React.useState([]);
 
     return (
         <React.Fragment>
-            <Navbar />
-            <Book />
+            <Navbar setFilteredBooks={setFilteredBooks} />
+            <FilteredBooks filteredBooks={filteredBooks} />
             <div className="flex justify-center m-4">
                 <NavLink to="#" className="flex items-center justify-center bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                     <div className='flex items-center '>

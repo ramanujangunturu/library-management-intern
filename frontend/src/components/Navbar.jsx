@@ -1,22 +1,61 @@
+import React from "react";
+import axios from 'axios'
 import { NavLink } from "react-router-dom"
-const Navbar = () => {
+import { useLocation } from "react-router-dom";
+const Navbar = ({ setFilteredBooks }) => {
+    let location = useLocation();
+    const [books, setBooks] = React.useState([]);
+    const [searchQuery, setSearchQuery] = React.useState('');
+
+    React.useEffect(() => {
+        fetchBooks();
+    }, []);
+
+    const fetchBooks = async () => {
+        try {
+            const response = await axios.get('http://localhost:5000/api/v1/book/getAllBooks');
+            setBooks(response.data.books);
+            setFilteredBooks(response.data.books);
+        } catch (error) {
+            console.error('Error fetching books:', error);
+        }
+    };
+
+    const handleSearch = (e) => {
+        const query = e.target.value.toLowerCase();
+        setSearchQuery(query);
+
+        const filtered = books.filter((book) =>
+            book.bookName.toLowerCase().includes(query) ||
+            book.author.toLowerCase().includes(query)
+        );
+
+        setFilteredBooks(filtered);
+    };
+
+    const currentPage = location.pathname
+    console.log("currenpage", currentPage)
     return (
         <nav className="bg-[#e0f7ed] border-gray-200">
             <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
                 <NavLink to="/home" className="flex items-center space-x-3 rtl:space-x-reverse aria-[current=page]:text-[#4CAF50]">
-                    <span className="self-center  whitespace-nowrap  uppercase tracking-wide text-xl font-bold text-gray-700 select-none">Library Management System</span>
+                    <span className="self-center  whitespace-nowrap  uppercase tracking-wide text-xl font-bold text-gray-700 ">Library Management System</span>
                 </NavLink>
-                <div className="flex md:order-2">
-                    <div className="relative hidden md:block">
-                        <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
-                            <svg className="w-4 h-4 text-gray-500 " aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
-                                <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
-                            </svg>
-                            <span className="sr-only">Search icon</span>
+                {currentPage === '/home' && (
+                    <div className="flex md:order-2">
+                        <div className="relative hidden md:block">
+                            <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+                                <svg className="w-4 h-4 text-gray-500 " aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                                    <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
+                                </svg>
+                                <span className="sr-only">Search icon</span>
+                            </div>
+                            <input type="text" id="search-navbar" className="block w-full p-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-focus:ring-[#4CAF50] focus:border-[#4CAF50] " placeholder="Find a Book" value={searchQuery}
+                                onChange={handleSearch} />
                         </div>
-                        <input type="text" id="search-navbar" className="block w-full p-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-focus:ring-[#4CAF50] focus:border-[#4CAF50] " placeholder="Find a Book" />
                     </div>
-                </div>
+                )}
+
                 <div className="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-search">
                     <div className="relative mt-3 md:hidden">
                         <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">

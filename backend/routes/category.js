@@ -6,7 +6,7 @@ const { auth,isAdmin} =require('../middleware/auth.js')
 
 router.post('/createCategory',createCategory)
 
-router.get('/getCategory/:id',auth,getCategory)
+router.get('/getCategory/:id',getCategory)
 router.get('/getCategories',showAllCategories)
 
 module.exports = router
