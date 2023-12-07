@@ -145,7 +145,7 @@ exports.editBookDetails = async (req, res) => {
             })
         }
 
-        const updatedBookDetails = { bookName, bookDescription, publicationYear, author, availability, availableCopies, categoryId }
+        const updatedBookDetails = { bookName, bookDescription, publicationYear, author, availability, availableCopies, category: categoryId }
 
         const updatedBook = await Book.findByIdAndUpdate(id, updatedBookDetails, { new: true });
 
@@ -171,26 +171,35 @@ exports.deleteBook = async (req, res) => {
         if (!mongoose.isValidObjectId(id)) return res.status(404).send(`No post with id: ${id}`);
 
         const bookDetails = await Book.findById(id);
-        console.log(bookDetails,"these are the book details")
         if (!bookDetails) {
             return res.status(404).json({
                 message: "No book details found by given id",
                 success: false,
-            })
+            });
         }
 
+        const categoryName = bookDetails.category;
+
         await Book.findByIdAndRemove(id);
+
+        const categoryDetails = await Category.findOne({ name: categoryName });
+        if (categoryDetails) {
+            categoryDetails.books = categoryDetails.books.filter((bookID) => bookID != id);
+            await categoryDetails.save();
+        } else {
+            console.log("Category not found for the book");
+        }
 
         return res.status(200).json({
             message: 'Deleted Book Successfully',
             success: true,
-        })
+        });
 
     } catch (error) {
-        console.log('/deletePost', error)
+        console.log('/deletePost', error);
         return res.status(500).json({
             message: 'Something went wrong while deleting details of book',
-            success: false
-        })
+            success: false,
+        });
     }
-}
+};

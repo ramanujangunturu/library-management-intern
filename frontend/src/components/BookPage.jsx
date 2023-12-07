@@ -17,14 +17,14 @@ const BookPage = () => {
     const fetchCardData = async () => {
         const token = sessionStorage.getItem('token');
         try {
-            const response = await axios.get(`http://localhost:5000/api/v1/book/getBook/${id}`,{
+            const response = await axios.get(`http://localhost:5000/api/v1/book/getBook/${id}`, {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 }
             });
             console.log(response.data.book);
             setBook(response.data.book);
-            setDataFetched(true); 
+            setDataFetched(true);
         } catch (error) {
             console.log('Error while fetching the book', error.message);
             toast.error('Error while fetching the data');
@@ -33,14 +33,17 @@ const BookPage = () => {
     const handleDelete = async () => {
         const token = sessionStorage.getItem('token');
         try {
-            const response = await axios.delete(`http://localhost:5000/api/v1/book/deleteBook/${id}`,{
+            const response = await axios.delete(`http://localhost:5000/api/v1/book/deleteBook/${id}`, {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 }
             });
             console.log(response.data.book);
             navigate('/home');
-            toast.success('Book Deleted Successfully');
+            toast.success('Book Deleted Successfully', {
+                autoClose: 3000,
+                hideProgressBar: true
+            });
         } catch (error) {
             console.log('Error while deleting the book', error.message);
             toast.error('Error while deleting the book');
