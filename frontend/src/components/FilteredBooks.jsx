@@ -13,18 +13,21 @@ const FilteredBooks = ({ filteredBooks }) => {
     const handleReadMoreClick = (index) => {
         navigate(`/book/${index}`)
     };
+    const handlePageChange = (pageNumber) => {
+        setCurrentPage(pageNumber);
+    };
     console.log("This is the filteredbooks", filteredBooks.length)
     return (
         <React.Fragment>
             <div className='grid gap-8 md:grid-cols-3'>
-                {filteredBooks?.length === 0 ? (
+                {currentBooks?.length === 0 ? (
                     <p>No books available</p>
                 ) : (
-                    filteredBooks?.map((book) => (
+                    currentBooks?.map((book) => (
                         <div className="max-w-6xl grid mx-auto h-screen" key={book._id}>
                             <div className="flex items-center justify-center min-h-screen">
                                 <div className="max-w-sm w-full py-6 px-3">
-                                    <img src={book.bookPhoto} width={200} alt={book.bookName} className='m-4'/>
+                                    <img src={book.bookPhoto} width={200} alt={book.bookName} className='m-4' />
                                     <div className="bg-white shadow-xl rounded-lg overflow-hidden">
                                         <div className="flex justify-end"></div>
                                     </div>
@@ -107,7 +110,23 @@ const FilteredBooks = ({ filteredBooks }) => {
                     ))
                 )}
             </div >
-        </React.Fragment>
+            <div className="flex justify-center mt-4">
+                {filteredBooks.length > booksPerPage && (
+                    <ul className="inline-flex -space-x-px text-sm mb-4">
+                        {Array.from({ length: Math.ceil(filteredBooks.length / booksPerPage) }).map((_, index) => (
+                            <li key={index} className={`pagination-button${currentPage === index + 1 ? '-active' : ''}`} >
+                                <button
+                                    onClick={() => handlePageChange(index + 1)}
+                                    className={`pagination-button1${currentPage === index + 1 ? '-active' : ''}`}
+                                >
+                                    {index + 1}
+                                </button>
+                            </li>
+                        ))}
+                    </ul>
+                )}
+            </div>
+        </React.Fragment >
 
     );
 };

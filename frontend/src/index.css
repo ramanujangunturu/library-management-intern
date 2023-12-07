@@ -49,3 +49,39 @@
     position: relative;
     background: #f3f3f3;
 }
+
+.pagination-button {
+    display: flex;
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+    margin-right: 0.25rem;
+    justify-content: center;
+    align-items: center;
+    border-width: 1px;
+    border-color: #D1D5DB;
+    height: 2rem;
+    line-height: 1.25;
+    color: #6B7280;
+    background-color: #ffffff;
+}
+
+.pagination-button:hover {
+    color: #374151;
+    background-color: #4CAF50;
+}
+
+.pagination-button-active {
+    display: flex;
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+    margin-right: 0.25rem;
+    justify-content: center;
+    align-items: center;
+    border-width: 1px;
+    border-color: #D1D5DB;
+    height: 2rem;
+    line-height: 1.25;
+    color: #6B7280;
+    background-color: #4CAF50;
+    color: white;
+}
