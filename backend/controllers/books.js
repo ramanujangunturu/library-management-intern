@@ -124,7 +124,7 @@ exports.createBook = async (req, res) => {
 exports.editBookDetails = async (req, res) => {
     try {
         const { id } = req.params;
-
+        console.log(id)
         const { bookName, bookDescription, publicationYear, author, availability, availableCopies, categoryId } = req.body;
 
         if (!id) {
@@ -133,9 +133,6 @@ exports.editBookDetails = async (req, res) => {
                 success: false
             })
         }
-
-        if (!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send(`No post with id: ${id}`);
-        if (!mongoose.Types.ObjectId.isValid(categoryId)) return res.status(404).send(`No post with id: ${categoryId}`);
 
         const book = await Book.findById(id);
         if (!book) {

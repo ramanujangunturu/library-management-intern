@@ -9,7 +9,7 @@ router.get('/getAllBooks',showAllBooks)
 
 //Admin routes
 router.post('/createBook',createBook)
-router.put('/editBook/:id',auth,isAdmin,editBookDetails)
+router.put('/editBook/:id',editBookDetails)
 router.delete('/deleteBook/:id',deleteBook)
 
 module.exports = router
