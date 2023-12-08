@@ -124,7 +124,6 @@ exports.createBook = async (req, res) => {
 exports.editBookDetails = async (req, res) => {
     try {
         const { id } = req.params;
-        console.log(id)
         const { bookName, bookDescription, publicationYear, author, availability, availableCopies, categoryId } = req.body;
 
         if (!id) {
