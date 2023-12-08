@@ -52,38 +52,36 @@ const AddBook = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log("this is the form Data", formData)
         try {
             const response = await axios.post('http://localhost:5000/api/v1/book/createBook', formData)
-            console.log("New Book added", response)
-            console.log("THis is the book", formData)
             toast.success(`Book "${formData.bookName}" added`, {
                 autoClose: 3000,
                 hideProgressBar: true
             });
-            setFormData({
+            setFormData((prevFormData) => ({
+                ...prevFormData,
                 bookName: "",
                 bookPhoto: "",
                 bookDescription: "",
                 availableCopies: "",
                 publicationYear: "",
+                availability: !isChecked, 
                 author: "",
                 categoryId: ""
-            })
+            }));
+            setIsChecked(false);
         } catch (error) {
-            console.log("Error while adding an book", error.message)
+            console.error("Error while adding an book", error.message)
             toast.error("Error while adding an Book")
         }
     }
     const handleCategory = async (e) => {
         e.preventDefault();
-        console.log("This is the category data", categoryData)
         try {
             const response = await axios.post(
                 "http://localhost:5000/api/v1/category/createCategory",
                 categoryData
             );
-            console.log("New category added:", response.data);
             toast.success(`Category "${categoryData.name}" added`, {
                 autoClose: 3000,
                 hideProgressBar: true
@@ -95,7 +93,7 @@ const AddBook = () => {
             window.location.reload()
 
         } catch (error) {
-            console.log("Error in adding the category", error.message);
+            console.error("Error in adding the category", error.message);
             toast.error("Failed to add category. Please try again later.");
         }
     };
@@ -103,11 +101,10 @@ const AddBook = () => {
     const getAllCategories = async () => {
         try {
             const response = await axios.get("http://localhost:5000/api/v1/category/getCategories")
-            // console.log("the respones for the categories is ", response.data.allCategory)
             setAllCategories(response.data.allCategory)
         } catch (error) {
             toast.error("Failed to fetch categories")
-            console.log("Failed to fetch categories", error.message)
+            console.error("Failed to fetch categories", error.message)
         }
     }
     React.useEffect(() => {

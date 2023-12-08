@@ -2,8 +2,11 @@ import React from "react";
 import axios from 'axios'
 import { NavLink } from "react-router-dom"
 import { useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 const Navbar = ({ setFilteredBooks }) => {
     let location = useLocation();
+    let navigate = useNavigate()
+    const [accountType, setAccountType] = React.useState('User')
     const [books, setBooks] = React.useState([]);
     const [searchQuery, setSearchQuery] = React.useState('');
 
@@ -33,8 +36,22 @@ const Navbar = ({ setFilteredBooks }) => {
         setFilteredBooks(filtered);
     };
 
+    const handleLogout = () => {
+        sessionStorage.clear()
+        navigate('/')
+    }
     const currentPage = location.pathname
-    console.log("currenpage", currentPage)
+    React.useEffect(() => {
+        if (sessionStorage.getItem('user')) {
+            const user = JSON.parse(sessionStorage.getItem('user'));
+            console.log("This is the user", user);
+            if (user.accountType === 'Admin') {
+                setAccountType("Admin");
+            } else {
+                setAccountType("User");
+            }
+        }
+    }, []);
     return (
         <nav className="bg-[#e0f7ed] border-gray-200">
             <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
@@ -69,8 +86,20 @@ const Navbar = ({ setFilteredBooks }) => {
                         <li>
                             <NavLink to="/home" className="block py-2 px-3  rounded md:bg-transparent md:text-gray-700 md:p-0 uppercase tracking-wide text-sm font-bold text-gray-700 hover:text-[#4CAF50] aria-[current=page]:text-[#4CAF50]" aria-current="page">Home</NavLink>
                         </li>
+                        {
+                            accountType === 'Admin' && (
+                                <li>
+                                    <NavLink to="/add-book" className="block py-2 px-3 rounded  md:hover:bg-transparent md:hover:text-[#4CAF50] md:p-0 md:dark:hover:text-[#4CAF50] uppercase tracking-wide text-sm font-bold text-gray-700 aria-[current=page]:text-[#4CAF50]">Add a Book</NavLink>
+                                </li>
+                            )
+                        }
                         <li>
-                            <NavLink to="/add-book" className="block py-2 px-3 rounded  md:hover:bg-transparent md:hover:text-[#4CAF50] md:p-0 md:dark:hover:text-[#4CAF50] uppercase tracking-wide text-sm font-bold text-gray-700 aria-[current=page]:text-[#4CAF50]">Add a Book</NavLink>
+                            <NavLink to="/profile"
+
+                                className="block py-2 px-3  rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-[#4CAF50] md:p-0 uppercase tracking-wide text-sm font-bold text-gray-700 aria-[current=page]:text-[#4CAF50]"
+                            >
+                                Categories
+                            </NavLink>
                         </li>
                         <li>
                             <NavLink to="/profile"
@@ -80,10 +109,15 @@ const Navbar = ({ setFilteredBooks }) => {
                                 profile
                             </NavLink>
                         </li>
+                        <li>
+                            <button className="block py-2 px-3  rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-[#4CAF50] md:p-0 uppercase tracking-wide text-sm font-bold text-gray-700 aria-[current=page]:text-[#4CAF50]" onClick={handleLogout}>
+                                LOGOUT
+                            </button>
+                        </li>
                     </ul>
                 </div>
             </div>
-        </nav>
+        </nav >
 
 
     )

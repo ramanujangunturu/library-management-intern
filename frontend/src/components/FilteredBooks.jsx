@@ -10,13 +10,12 @@ const FilteredBooks = ({ filteredBooks }) => {
     const indexOfLastBook = currentPage * booksPerPage;
     const indexOfFirstBook = indexOfLastBook - booksPerPage;
     const currentBooks = filteredBooks.slice(indexOfFirstBook, indexOfLastBook);
-    const handleReadMoreClick = (index) => {
-        navigate(`/book/${index}`)
-    };
     const handlePageChange = (pageNumber) => {
         setCurrentPage(pageNumber);
     };
-    console.log("This is the filteredbooks", filteredBooks.length)
+    const handleReadMoreClick = (index) => {
+        navigate(`/book/${index}`)
+    };
     return (
         <React.Fragment>
             <div className='grid gap-8 md:grid-cols-3'>

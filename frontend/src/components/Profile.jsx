@@ -1,33 +1,11 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
+import React from "react";
 import Navbar from "./Navbar";
 
 const Profile = () => {
-  const [userData, setUserData] = useState({});
-
-  useEffect(() => {
-    const fetchUserData = async () => {
-      try {
-        const response = await axios.get(
-          "http://localhost:5000/api/v1/auth/details",
-          {
-            headers: {
-              Authorization: `Bearer ${sessionStorage.getItem("token")}`,
-            },
-          }
-        );
-        setUserData(response.data.user);
-      } catch (error) {
-        console.error("Error fetching user data:", error);
-      }
-    };
-
-    fetchUserData();
-  }, []);
-
-  useEffect(() => {
-    console.log(userData);
-  }, [userData]);
+  const [userData, setUserData] = React.useState({});
+  React.useEffect(() => {
+    setUserData(JSON.parse(sessionStorage.getItem("user")))
+  }, [])
 
   return (
     <>
@@ -58,7 +36,7 @@ const Profile = () => {
         </div>
       </div>
       <div className="reservedBooks inline-block w-6/12 h-3/4">
-        <h1 className="text-3xl font-bold w-6/12 text-center mt-6 mb-6 w-full text-indigo-700">
+        <h1 className="text-3xl font-bold  text-center mt-6 mb-6 w-full text-indigo-700">
           Reserved Books
         </h1>
       </div>

@@ -19,14 +19,14 @@ exports.signUp = async (req, res) => {
             !firstName ||
             !lastName ||
             !email ||
-            !confirmPassword 
+            !confirmPassword
         ) {
             return res.status(400).json({
                 success: false,
                 message: "Please Fill in all the Required Fields to Sign up.",
             });
         }
-        
+
         const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
         if (!emailPattern.test(email)) {
             return res.status(400).json({
@@ -55,17 +55,18 @@ exports.signUp = async (req, res) => {
 
         const hashedPassword = await bcrypt.hash(password, 10);
 
-        const adminUser = await User.find({accountType: 'Admin'})
+        const adminUser = await User.findOne({ accountType: 'Admin' });
 
-        if(accountType==='Admin'&& adminUser){
+        if (accountType === 'Admin' && adminUser) {
             return res.status(403).json({
                 message: 'Admin user already exists',
                 success: false
-            })
+            });
         }
 
-        if(accountType==null){
-            accountType="User"
+
+        if (accountType == null) {
+            accountType = "User"
         }
 
         const user = await User.create({
@@ -92,10 +93,10 @@ exports.signUp = async (req, res) => {
     }
 };
 
-exports.details= async (req,res)=>{
-    try{
+exports.details = async (req, res) => {
+    try {
         const user = await User.findById(req.user.id)
-        if(!user){
+        if (!user) {
             return res.status(404).json({
                 success: false,
                 message: "User not found"
@@ -105,7 +106,7 @@ exports.details= async (req,res)=>{
             success: true,
             user
         })
-    }catch(error){
+    } catch (error) {
         console.error("Error in details:", error);
         return res.status(500).json({
             success: false,
@@ -113,7 +114,7 @@ exports.details= async (req,res)=>{
             error: error.message,
         });
     }
-}   
+}
 
 
 exports.login = async (req, res) => {

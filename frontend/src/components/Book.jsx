@@ -4,7 +4,13 @@ import axios from 'axios';
 
 const Book = () => {
     const [books, setBooks] = React.useState([]);
-    const [dataFetched, setDataFetched] = React.useState(false);
+    const booksPerPage = 6;
+    var currentPage = 1
+    var dataFetched = false;
+    const indexOfLastBook = currentPage * booksPerPage;
+    const indexOfFirstBook = indexOfLastBook - booksPerPage;
+    const currentBooks = books.slice(indexOfFirstBook, indexOfLastBook);
+
     React.useEffect(() => {
         if (!dataFetched) {
             fetchBooks();
@@ -15,7 +21,6 @@ const Book = () => {
     const fetchBooks = async () => {
         try {
             const response = await axios.get('http://localhost:5000/api/v1/book/getAllBooks');
-            console.log(response.data.books)
             setBooks(response.data.books)
         } catch (error) {
             console.error('Error fetching books:', error);
@@ -29,14 +34,14 @@ const Book = () => {
     return (
         <React.Fragment>
             <div className="max-w-6xl mx-auto grid gap-8 sm:grid-cols-1 md:grid-cols-3">
-                {books?.length === 0 ? (
+                {currentBooks?.length === 0 ? (
                     <p>No books available</p>
                 ) : (
-                    books?.map((book) => (
+                    currentBooks?.map((book) => (
                         <div className="max-w-6xl mx-auto h-screen" key={book._id}>
                             <div className="flex items-center justify-center min-h-screen">
                                 <div className="max-w-sm w-full py-6 px-3">
-                                    <img src={book.bookPhoto} width={200} alt={book.bookName} className='m-4'/>
+                                    <img src={book.bookPhoto} width={200} alt={book.bookName} className='m-4' />
                                     <div className="bg-white shadow-xl rounded-lg overflow-hidden">
                                         <div className="flex justify-end"></div>
                                     </div>

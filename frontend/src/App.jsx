@@ -9,20 +9,21 @@ import AddBook from "./components/AddBook.jsx";
 import { ToastContainer } from "react-toastify";
 import Profile from "./components/Profile.jsx";
 import Edit from "./components/EditPage.jsx";
-
-
+import PrivateRoutes from "./PrivateRoute.jsx";
 function App() {
   return (
     <>
       <ToastContainer />
       <Routes>
-        <Route path="/home" Component={Home}></Route>
         <Route path="/" Component={Login} ></Route>
         <Route path="/signup" Component={Signup} ></Route>
-        <Route path="/admin" Component={AdminLogin}></Route>
-        <Route path="/book/:id" Component={BookPage}></Route>
-        <Route path="/add-book" Component={AddBook}></Route>
-        <Route path="/profile" Component={Profile}></Route>
+        <Route element={<PrivateRoutes />}>
+          <Route path="/home" Component={Home}></Route>
+          <Route path="/admin" Component={AdminLogin}></Route>
+          <Route path="/book/:id" Component={BookPage}></Route>
+          <Route path="/add-book" Component={AddBook}></Route>
+          <Route path="/profile" Component={Profile}></Route>
+        </Route>
         <Route path="/edit" Component={Edit}></Route>
       </Routes>
     </>

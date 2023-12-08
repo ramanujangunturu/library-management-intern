@@ -6,6 +6,6 @@ const { reserveBook, deleteBook, editBook } = require('../controllers/reservedBo
 
 router.put('/dd', auth, isUser, reserveBook)
 router.delete('/deleteReserveBook/:id', auth, isUser, deleteBook)
-router.put('/editBook/:id',auth,isUser,editBook)
+router.put('/editBook/:id', auth, isUser, editBook)
 
 module.exports = router;
