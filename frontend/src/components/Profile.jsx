@@ -36,7 +36,7 @@ const Profile = () => {
         </div>
       </div>
       <div className="reservedBooks inline-block w-6/12 h-3/4">
-        <h1 className="text-3xl font-bold  text-center mt-6 mb-6 w-full text-indigo-700">
+        <h1 className="text-3xl font-bold w-6/y text-center mt-6 mb-6 w-full text-indigo-700">
           Reserved Books
         </h1>
       </div>

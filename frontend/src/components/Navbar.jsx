@@ -98,14 +98,6 @@ const Navbar = ({ setFilteredBooks }) => {
 
                                 className="block py-2 px-3  rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-[#4CAF50] md:p-0 uppercase tracking-wide text-sm font-bold text-gray-700 aria-[current=page]:text-[#4CAF50]"
                             >
-                                Categories
-                            </NavLink>
-                        </li>
-                        <li>
-                            <NavLink to="/profile"
-
-                                className="block py-2 px-3  rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-[#4CAF50] md:p-0 uppercase tracking-wide text-sm font-bold text-gray-700 aria-[current=page]:text-[#4CAF50]"
-                            >
                                 profile
                             </NavLink>
                         </li>

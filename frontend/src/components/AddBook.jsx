@@ -52,8 +52,17 @@ const AddBook = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        const token = sessionStorage.getItem("token")
         try {
-            const response = await axios.post('http://localhost:5000/api/v1/book/createBook', formData)
+            const response = await axios.post(
+                'http://localhost:5000/api/v1/book/createBook',
+                formData,
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    }
+                }
+            );
             toast.success(`Book "${formData.bookName}" added`, {
                 autoClose: 3000,
                 hideProgressBar: true
@@ -65,7 +74,7 @@ const AddBook = () => {
                 bookDescription: "",
                 availableCopies: "",
                 publicationYear: "",
-                availability: !isChecked, 
+                availability: !isChecked,
                 author: "",
                 categoryId: ""
             }));
