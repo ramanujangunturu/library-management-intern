@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useEffect, useState, useContext } from "react";
+import UserContext from "../context/UserContext";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
@@ -6,7 +7,7 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loginMessage, setLoginMessage] = useState("");
-
+  const { loggedIn,setLoggedIn } = useContext(UserContext)
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
@@ -20,6 +21,8 @@ const Login = () => {
         console.log(res.data);
         sessionStorage.setItem("token", res.data.token);
         sessionStorage.setItem("user", JSON.stringify(res.data.user));
+        setLoggedIn(true);
+        console.log("Logged in", loggedIn)
         navigate("/home");
       }
     }).catch((err) => {
