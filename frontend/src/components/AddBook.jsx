@@ -399,7 +399,7 @@ const AddBook = () => {
                                                 <div className="ml-3 text-sm">
                                                     <label
                                                         htmlFor="remember"
-                                                        className="font-medium text-black "
+                                                        className="font-medium text-black"
                                                     >
                                                         Availability of Book
                                                     </label>

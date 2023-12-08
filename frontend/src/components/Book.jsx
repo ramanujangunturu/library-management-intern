@@ -46,7 +46,7 @@ const Book = () => {
                                         <div className="flex justify-end"></div>
                                     </div>
                                     <div className="p-4">
-                                        <p className="uppercase tracking-wide text-sm font-bold text-gray-700">
+                                        <div className="uppercase tracking-wide text-sm font-bold text-gray-700">
                                             <p className="text-3xl text-gray-900">
                                                 <NavLink to={`/book/${book._id}`}>
                                                     {
@@ -74,7 +74,7 @@ const Book = () => {
                                                 </NavLink>
                                             </p>
                                             {book.author} • {book.publicationYear}
-                                        </p>
+                                        </div>
                                         {book.bookDescription.length > 50 ? (
                                             <>
                                                 <p className="text-gray-700">
@@ -112,11 +112,11 @@ const Book = () => {
                                             </p>
                                         </div>
                                     </div>
-                                    <button className="m-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                                        <NavLink to={`/book/${book._id}`}>
+                                    <NavLink to={`/book/${book._id}`}>
+                                        <button className="m-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                                             Reserve Book
-                                        </NavLink>
-                                    </button>
+                                        </button>
+                                    </NavLink>
                                 </div>
                             </div>
                         </div>

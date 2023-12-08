@@ -13,8 +13,6 @@ exports.signUp = async (req, res) => {
             accountType,
         } = req.body;
 
-        console.log("hello")
-
         if (
             !firstName ||
             !lastName ||
